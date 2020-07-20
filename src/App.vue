@@ -20,4 +20,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+#app {
+  background-color: #eee;
+}
 </style>
