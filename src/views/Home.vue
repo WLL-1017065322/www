@@ -3,8 +3,8 @@
     <div class="top">
       <div class="logo">along</div>
       <div class="search">
-        <a-input-search placeholder="input search text" size="default" @search="onSearch">
-          <a-button slot="enterButton">Custom</a-button>
+        <a-input-search placeholder="输入关键词" size="default" @search="onSearch">
+          <a-button slot="enterButton">搜索</a-button>
         </a-input-search>
       </div>
     </div>
@@ -23,14 +23,19 @@
               <img :src="item.src" alt />
             </div>
           </a-carousel>
+          <!-- <div class="notice">
+            <div class="title">公告</div>
+            <div class="content"></div>
+          </div>-->
         </div>
         <!-- 内容导向+热门导向 -->
+        <!-- 个人作品 -->
         <div class="hot-content">
           <div class="title">
             <div class="text">个人作品</div>
             <div class="more">更多</div>
           </div>
-          <ul class="content">
+          <ul class="picture-content">
             <li v-for="(item,index) in demos" :key="index">
               <div class="img">
                 <img :src="item.src" />
@@ -39,31 +44,42 @@
             </li>
           </ul>
         </div>
+        <!-- 封装组件 -->
         <div class="hot-content">
           <div class="title">
             <div class="text">封装组件</div>
             <div class="more">更多</div>
           </div>
-          <div class="content"></div>
+          <div class="title-content">
+            <li v-for="(item,index) in demo3" :key="index">
+              <div class="content-title">{{item.title}}</div>
+              <div class="time">{{item.time}}</div>
+            </li>
+          </div>
         </div>
+        <!-- 在线工具 -->
         <div class="hot-content">
           <div class="title">
             <div class="text">在线工具</div>
             <div class="more">更多</div>
           </div>
-          <div class="content"></div>
+          <div class="title-content">
+            <li v-for="(item,index) in demo3" :key="index">
+              <div class="content-title">{{item.title}}</div>
+              <div class="time">{{item.time}}</div>
+            </li>
+          </div>
         </div>
+        <!-- 热门事件随记 -->
         <div class="hot-content">
           <div class="title">
             <div class="text">热门事件随记</div>
             <div class="more">更多</div>
           </div>
-          <ul class="content">
-            <li v-for="(item,index) in demos" :key="index">
-              <div class="img">
-                <img :src="item.src" />
-              </div>
-              <div class="text">{{item.text}}</div>
+          <ul class="title-content">
+            <li v-for="(item,index) in demo3" :key="index">
+              <div class="content-title">{{item.title}}</div>
+              <div class="time">{{item.time}}</div>
             </li>
           </ul>
         </div>
@@ -73,7 +89,7 @@
             <div class="text">百草集</div>
             <div class="more">更多</div>
           </div>
-          <ul class="content">
+          <ul class="picture-content">
             <li v-for="(item,index) in demos" :key="index">
               <div class="img">
                 <img :src="item.src" />
@@ -88,7 +104,7 @@
             <div class="text">百虫集</div>
             <div class="more">更多</div>
           </div>
-          <ul class="content">
+          <ul class="picture-content">
             <li v-for="(item,index) in demos" :key="index">
               <div class="img">
                 <img :src="item.src" />
@@ -120,6 +136,10 @@
           <div class="text">标签云</div>
           <div class="card-content"></div>
         </div>
+        <div class="website-message home-card">
+          <div class="text">网站信息</div>
+          <div class="card-content"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -148,6 +168,40 @@ export default {
         { src: '/001.jpg', text: 'vue' },
         { src: '/001.jpg', text: 'vue' },
         { src: '/001.jpg', text: 'vue' }
+      ],
+      demo3: [
+        {
+          title: 'Chrome 80正式发布下载：强化HTTPS 禁用FTP 通知消息更静默',
+          time: '12/04'
+        },
+        {
+          title: 'Chrome 80正式发布下载：强化HTTPS 禁用FTP 通知消息更静默',
+          time: '12/04'
+        },
+        {
+          title: 'Chrome 80正式发布下载：强化HTTPS 禁用FTP 通知消息更静默',
+          time: '12/04'
+        },
+        {
+          title: 'Chrome 80正式发布下载：强化HTTPS 禁用FTP 通知消息更静默',
+          time: '12/04'
+        },
+        {
+          title: 'Chrome 80正式发布下载：强化HTTPS 禁用FTP 通知消息更静默',
+          time: '12/04'
+        },
+        {
+          title: 'Chrome 80正式发布下载：强化HTTPS 禁用FTP 通知消息更静默',
+          time: '12/04'
+        },
+        {
+          title: 'Chrome 80正式发布下载：强化HTTPS 禁用FTP 通知消息更静默',
+          time: '12/04'
+        },
+        {
+          title: 'Chrome 80正式发布下载：强化HTTPS 禁用FTP 通知消息更静默',
+          time: '12/04'
+        }
       ]
     }
   },
@@ -171,11 +225,10 @@ export default {
 .home {
   width: 1200px;
   margin: 0 auto;
-
+  padding-bottom: 15px;
   .top {
     width: 100%;
     height: 90px;
-    background-color: blue;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -190,13 +243,15 @@ export default {
     }
   }
   .home-content {
+    width: 100%;
     display: flex;
     .left {
-      width: 75%;
+      width: 70%;
       // 轮播图
       .slide-show {
-        margin: 2px 50px;
+        margin: 2px 2px;
         .ant-carousel {
+          // width:70%;
           .slick-slider {
             text-align: center;
             height: 160px;
@@ -228,6 +283,7 @@ export default {
       .hot-content {
         width: 100%;
         background-color: #fff;
+        padding-bottom: 5px;
         .title {
           color: #fff;
           background-color: #c0392b;
@@ -246,7 +302,7 @@ export default {
             cursor: pointer;
           }
         }
-        .content {
+        .picture-content {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -258,7 +314,7 @@ export default {
             width: 25%;
             cursor: pointer;
             &:hover {
-              background-color: #eee;
+              background-color: #3498db;
             }
             .img {
               img {
@@ -267,10 +323,25 @@ export default {
             }
           }
         }
+        .title-content {
+          li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 20px;
+            font-size: 14px;
+
+            .content-title:hover {
+              cursor: pointer;
+              text-decoration: underline;
+              color: #3498db;
+            }
+          }
+        }
       }
     }
     .right {
-      width: 100%;
+      width: 30%;
       margin-left: 10px;
       // 右侧卡片通用
       .home-card {

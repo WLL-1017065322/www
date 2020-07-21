@@ -40,6 +40,7 @@ export default {
   left: 50%;
   background-color: aquamarine;
   transform: translate(-50%, -50%);
+  z-index: 999;
   .content {
   }
 }
