@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       demos: [
-        { src: '/xxyl.jpg', title: 'vue', content: '购物车结算jq，订单的选择或删除、金额的计算。' },
+        { src: '/xxyl.jpg', title: 'vue1', content: '购物车结算jq，订单的选择或删除、金额的计算。' },
         { src: '/xxyl.jpg', title: 'vue', content: '购物车结算jq，订单的选择或删除、金额的计算。' },
         { src: '/xxyl.jpg', title: 'vue', content: '购物车结算jq，订单的选择或删除、金额的计算。' },
         { src: '/xxyl.jpg', title: 'vue', content: '购物车结算jq，订单的选择或删除、金额的计算。' },

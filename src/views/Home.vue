@@ -122,18 +122,24 @@
         <div class="notice home-card">
           <div class="text">公告</div>
           <div class="card-content">
-            <p>
-              ( ＾∀＾）／欢迎＼( ＾∀＾）
-            </p>
+            <p>( ＾∀＾）／欢迎＼( ＾∀＾）</p>
           </div>
         </div>
-        <div class="classify home-card">
+        <!-- <div class="classify home-card">
           <div class="text">分类</div>
           <div class="card-content"></div>
-        </div>
+        </div>-->
         <div class="love home-card">
           <div class="text">猜你喜欢</div>
-          <div class="card-content"></div>
+          <ul class="card-content">
+            <li v-for="(item,index) in loves" :key="index">
+              <p
+                class="rank-number"
+                :style="{backgroundColor:index<3?bgColorLists[0]:bgColorLists[1]}"
+              >{{index+1}}</p>
+              <a :href="item.src">{{item.title}}</a>
+            </li>
+          </ul>
         </div>
         <!-- <div class="card1 home-card">
           <div class="text">新浪微博</div>
@@ -149,7 +155,13 @@
         </div>
         <div class="tagCloud home-card">
           <div class="text">标签云</div>
-          <div class="card-content"></div>
+          <ul class="card-content">
+            <li
+              v-for="(item,index) in tags"
+              :key="index"
+              :style="{backgroundColor:randomColor[index]}"
+            >{{item}}</li>
+          </ul>
         </div>
         <div class="website-message home-card">
           <div class="text">网站信息</div>
@@ -161,6 +173,8 @@
         </div>
       </div>
     </div>
+
+    <!--  -->
   </div>
 </template>
 
@@ -238,9 +252,42 @@ export default {
         { title: '文章统计', content: 'cxxxx' },
         { title: '服务器', content: 'xxxx', src: 'https://www.baidu.com' },
         { title: 'ip地址', content: 'xxxx' },
+        { title: '评论', content: '333条' },
         { title: '最后更新', content: '2020年07月22日' }
 
-      ]
+      ],
+      tags: ['JavaScript',
+        'deepin',
+        'Vue',
+        'H5学习',
+        '越野路书',
+        '深度操作系统',
+        '小程序',
+        'jQuery',
+        'Node',
+        '萝卜报告',
+        'js',
+        '上传图片',
+        'window对象',
+        'Ajax',
+        'docker',
+        'CSS',
+        '宝塔',
+        'MongoDB',
+        '越野路书第九季'],
+      loves: [
+        { src: '/xxyl.jpg', title: '1000部BluRay蓝光高清大片种子百度' },
+        { src: '/xxyl.jpg', title: '1000部BluRay蓝光高清大片种子百度' },
+        { src: '/xxyl.jpg', title: '1000部BluRay蓝光高清大片种子百度' },
+        { src: '/xxyl.jpg', title: '1000部BluRay蓝光高清大片种子百度' },
+        { src: '/xxyl.jpg', title: '1000部BluRay蓝光高清大片种子百度' },
+        { src: '/xxyl.jpg', title: '1000部BluRay蓝光高清大片种子百度' },
+        { src: '/xxyl.jpg', title: '1000部BluRay蓝光高清大片种子百度' },
+        { src: '/xxyl.jpg', title: '1000部BluRay蓝光高清大片种子百度' }
+      ],
+      bgColorLists: ['#e70', '#f7bb7f'],
+      randomColor: [],
+      colorNum: 30
     }
   },
   methods: {
@@ -249,7 +296,18 @@ export default {
     },
     ceshi () {
       console.log(this.demos)
+    },
+    colorRandomFunc () {
+      for (let i = 0; i < this.colorNum; i++) {
+        const color = '#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).substr(-6)
+        this.randomColor.push(color)
+      }
     }
+  },
+  created () {
+    this.colorRandomFunc()
+  },
+  computed: {
   },
   components: {
   },
@@ -296,6 +354,9 @@ export default {
             line-height: 160px;
             background: #364d79;
             overflow: hidden;
+            img {
+              width: 100%;
+            }
             .custom-slick-arrow {
               width: 25px;
               height: 25px;
@@ -390,7 +451,7 @@ export default {
         .text {
           font-size: 1.1rem;
           border-bottom: 1px solid #90bba8;
-          padding: 10px 0;
+          padding-bottom: 10px;
           position: relative;
           &::after {
             content: ' ';
@@ -408,6 +469,7 @@ export default {
         }
         .card-content {
           min-height: 100px;
+          padding: 10px 0;
         }
       }
       // 右侧卡片单独
@@ -425,16 +487,34 @@ export default {
       .notice {
         .card-content {
           p {
-            padding: 20px;
-            font-size: .9rem;
+            padding: 10px;
+            font-size: 0.9rem;
           }
         }
       }
-      .classify {
-      }
       .love {
-      }
-      .card1 {
+        ul {
+          li {
+            padding: 10px 0;
+            display: flex;
+            font-size: 0.9rem;
+            .rank-number {
+              color: #fff;
+              background-color: #d81;
+              width: 20px;
+              height: 20px;
+              text-align: center;
+              margin-right: 10px;
+            }
+            a {
+              color: #777;
+              text-decoration: none;
+              &:hover {
+                color: #000;
+              }
+            }
+          }
+        }
       }
       .blogrolls {
         ul {
@@ -444,7 +524,6 @@ export default {
           flex-direction: column;
           color: #000;
           font-size: 0.9rem;
-          padding: 10px 0;
           li {
             width: 100%;
             padding: 5px 0;
@@ -459,6 +538,23 @@ export default {
         }
       }
       .tagCloud {
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          li {
+            margin: 4px;
+            padding: 3px 12px;
+            color: #fff;
+            background-color: #40a9ff;
+            font-size: 0.9rem;
+            // line-height: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            &:hover {
+              opacity: .5;
+            }
+          }
+        }
       }
       // 网站信息
       .website-message {
@@ -469,7 +565,6 @@ export default {
           flex-direction: column;
           color: #000;
           font-size: 0.9rem;
-          padding: 10px 0;
           li {
             width: 100%;
             padding: 5px 0;
