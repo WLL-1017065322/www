@@ -115,7 +115,18 @@
         </div>
       </div>
       <div class="right">
-        <div class="weather">天气</div>
+        <div class="weather">
+          <!-- 和风天气插件 -->
+          <div id="he-plugin-simple"></div>
+        </div>
+        <div class="notice home-card">
+          <div class="text">公告</div>
+          <div class="card-content">
+            <p>
+              ( ＾∀＾）／欢迎＼( ＾∀＾）
+            </p>
+          </div>
+        </div>
         <div class="classify home-card">
           <div class="text">分类</div>
           <div class="card-content"></div>
@@ -124,13 +135,17 @@
           <div class="text">猜你喜欢</div>
           <div class="card-content"></div>
         </div>
-        <div class="card1 home-card">
+        <!-- <div class="card1 home-card">
           <div class="text">新浪微博</div>
           <div class="card-content"></div>
-        </div>
-        <div class="card2 home-card">
+        </div>-->
+        <div class="blogrolls home-card">
           <div class="text">友情链接</div>
-          <div class="card-content"></div>
+          <ul class="card-content">
+            <li v-for="(item,index) in blogrolls" :key="index">
+              <a :href="item.src">{{item.text}}</a>
+            </li>
+          </ul>
         </div>
         <div class="tagCloud home-card">
           <div class="text">标签云</div>
@@ -138,7 +153,11 @@
         </div>
         <div class="website-message home-card">
           <div class="text">网站信息</div>
-          <div class="card-content"></div>
+          <ul class="card-content">
+            <li v-for="(item,index) in websiteMessages" :key="index">
+              <p :href="item.src">{{item.title}} : {{item.content}}</p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -202,6 +221,25 @@ export default {
           title: 'Chrome 80正式发布下载：强化HTTPS 禁用FTP 通知消息更静默',
           time: '12/04'
         }
+      ],
+      blogrolls: [
+        { src: 'https://www.baidu.com', text: '百度' },
+        { src: 'https://www.baidu.com', text: '网络营销推广' },
+        { src: 'https://www.baidu.com', text: '百度' },
+        { src: 'https://www.baidu.com', text: '网络营销推广' },
+        { src: 'https://www.baidu.com', text: '网络营销推广' },
+        { src: 'https://www.baidu.com', text: '百度' }
+      ],
+      websiteMessages: [
+        { title: '建站时间', content: '2011年01月12日', src: 'https://www.baidu.com' },
+        { title: '统计数据', content: '百度统计' },
+        { title: '网站程序', content: 'vue+node', src: 'https://www.baidu.com' },
+        { title: '博客模板', content: 'xxxx', src: 'https://www.baidu.com' },
+        { title: '文章统计', content: 'cxxxx' },
+        { title: '服务器', content: 'xxxx', src: 'https://www.baidu.com' },
+        { title: 'ip地址', content: 'xxxx' },
+        { title: '最后更新', content: '2020年07月22日' }
+
       ]
     }
   },
@@ -353,17 +391,44 @@ export default {
           font-size: 1.1rem;
           border-bottom: 1px solid #90bba8;
           padding: 10px 0;
+          position: relative;
+          &::after {
+            content: ' ';
+            width: 50px;
+            height: 2px;
+            background-color: #7f8c8d;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transition: 1s;
+          }
+          &:hover::after {
+            width: 100px;
+          }
         }
         .card-content {
-          height: 200px;
+          min-height: 100px;
         }
       }
       // 右侧卡片单独
+      // 天气
       .weather {
         box-shadow: 1px 1px 2px #888888;
-        background-color: #321;
-        height: 80px;
+        // height: 80px;
         margin-bottom: 5px;
+        border-radius: 5px;
+        #he-plugin-simple {
+          width: 100%;
+          // height: 80px;
+        }
+      }
+      .notice {
+        .card-content {
+          p {
+            padding: 20px;
+            font-size: .9rem;
+          }
+        }
       }
       .classify {
       }
@@ -371,9 +436,48 @@ export default {
       }
       .card1 {
       }
-      .card2 {
+      .blogrolls {
+        ul {
+          display: flex;
+          justify-content: space-around;
+          align-items: flex-start;
+          flex-direction: column;
+          color: #000;
+          font-size: 0.9rem;
+          padding: 10px 0;
+          li {
+            width: 100%;
+            padding: 5px 0;
+            &:hover {
+              background-color: #eee;
+            }
+            a {
+              text-decoration: none;
+              color: #666;
+            }
+          }
+        }
       }
       .tagCloud {
+      }
+      // 网站信息
+      .website-message {
+        ul {
+          display: flex;
+          justify-content: space-around;
+          align-items: flex-start;
+          flex-direction: column;
+          color: #000;
+          font-size: 0.9rem;
+          padding: 10px 0;
+          li {
+            width: 100%;
+            padding: 5px 0;
+            p {
+              color: #666;
+            }
+          }
+        }
       }
     }
   }

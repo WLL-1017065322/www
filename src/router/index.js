@@ -5,10 +5,17 @@ const Board = () => import(/* webpackChunkName: "about" */ '../views/Board.vue')
 const Tools = () => import(/* webpackChunkName: "about" */ '../views/Tools.vue')
 const Log = () => import(/* webpackChunkName: "about" */ '../views/Log.vue')
 const Demo = () => import(/* webpackChunkName: "about" */ '../views/Demo.vue')
-const Component = () => import(/* webpackChunkName: "Component" */ '../views/Component.vue')
-const Hotevent = () => import(/* webpackChunkName: "about" */ '../views/Hotevent.vue')
+const Component = () =>
+  import(/* webpackChunkName: "Component" */ '../views/Component.vue')
+const Hotevent = () =>
+  import(/* webpackChunkName: "about" */ '../views/Hotevent.vue')
 const Chong = () => import(/* webpackChunkName: "about" */ '../views/Chong.vue')
 const Grass = () => import(/* webpackChunkName: "about" */ '../views/Grass.vue')
+//
+const ComponentRight = () =>
+  import(
+    /* webpackChunkName: "about" */ '../components/Component/ComponentRight.vue'
+  )
 
 const About = () => import(/* webpackChunkName: "about" */ '../views/About.vue')
 Vue.use(VueRouter)
@@ -27,7 +34,13 @@ const routes = [
   {
     path: '/tools',
     name: 'Tools',
-    component: Tools
+    component: Tools,
+    children: [
+      {
+        path: '/tools/:id',
+        component: ComponentRight
+      }
+    ]
   },
   {
     path: '/log',
@@ -42,7 +55,13 @@ const routes = [
   {
     path: '/component',
     name: 'Component',
-    component: Component
+    component: Component,
+    children: [
+      {
+        path: '/component/:id',
+        component: ComponentRight
+      }
+    ]
   },
   {
     path: '/hotevent',
